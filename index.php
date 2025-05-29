@@ -9,13 +9,11 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./app.js"></script>
     <?php
-    // Datenbankverbindung (Anmeldedaten nach Bedarf anpassen)
-    $conn = new mysqli("localhost:3306", "mariadb", "mariadb", "mariadb");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Ordnungsgemäße Charset für deutsche Zeichen sicherstellen
-    $conn->set_charset("utf8mb4");
+    // Datenbankverbindung einbinden
+    require_once 'config/database.php';
+    
+    // Datenbankverbindung mit Umgebungsvariablen abrufen
+    $conn = getDatabaseConnection();
 
     // Tabellen erstellen, falls nicht vorhanden
     $sql = "CREATE TABLE IF NOT EXISTS woerter (

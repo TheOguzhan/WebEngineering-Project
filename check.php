@@ -1,4 +1,7 @@
 <?php
+// Datenbankverbindung einbinden
+require_once 'config/database.php';
+
 // Prüfen, ob die Request-Methode POST ist
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Ungültige Request-Methode']);
@@ -35,16 +38,8 @@ if (mb_strlen($word, 'UTF-8') !== 5) {
 
 
 
-// Mit der Datenbank verbinden
-$conn = new mysqli("localhost:3306", "mariadb", "mariadb", "mariadb");
-if ($conn->connect_error) {
-    echo json_encode(['error' => 'Datenbankverbindung fehlgeschlagen']);
-    http_response_code(500);
-    exit;
-}
-
-// Ordnungsgemäße Charset für deutsche Zeichen sicherstellen
-$conn->set_charset("utf8mb4");
+// Datenbankverbindung mit Umgebungsvariablen abrufen
+$conn = getDatabaseConnection();
 
 // Prüfen, ob das Wort in der woerter-Tabelle existiert
 $stmt = $conn->prepare("SELECT id FROM woerter WHERE word = ?");

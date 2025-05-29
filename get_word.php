@@ -9,15 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Datenbankverbindung
-$conn = new mysqli("localhost:3306", "mariadb", "mariadb", "mariadb");
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Datenbankverbindung fehlgeschlagen']);
-    exit;
-}
+// Datenbankverbindung einbinden
+require_once 'config/database.php';
 
-$conn->set_charset("utf8mb4");
+// Datenbankverbindung mit Umgebungsvariablen abrufen
+$conn = getDatabaseConnection();
 
 // UUID aus Query-Parameter erhalten
 $uuid = $_GET['uuid'] ?? '';

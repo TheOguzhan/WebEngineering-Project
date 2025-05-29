@@ -3,13 +3,11 @@
 header('Content-Type: application/json');
 session_start(); // Session starten, um auf den Spitznamen des Benutzers zuzugreifen
 
-// Datenbankverbindung
-$conn = new mysqli("localhost:3306", "mariadb", "mariadb", "mariadb");
-if ($conn->connect_error) {
-    echo json_encode(['error' => 'Verbindung fehlgeschlagen: ' . $conn->connect_error]);
-    exit;
-}
-$conn->set_charset("utf8mb4");
+// Datenbankverbindung einbinden
+require_once 'config/database.php';
+
+// Datenbankverbindung mit Umgebungsvariablen abrufen
+$conn = getDatabaseConnection();
 
 $spiel_uuid = $_GET['spiel_uuid'] ?? null;
 $user_nickname_from_session = $_SESSION['user_nickname'] ?? null;
