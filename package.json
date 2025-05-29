@@ -1,0 +1,28 @@
+{
+  "name": "webengineering-project",
+  "version": "1.0.0",
+  "description": "> https://github.com/wordle-helper/words",
+  "main": "1-1-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheOguzhan/WebEngineering-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TheOguzhan/WebEngineering-Project/issues"
+  },
+  "homepage": "https://github.com/TheOguzhan/WebEngineering-Project#readme",
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "nodemon": "^3.1.10",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2"
+  }
+}

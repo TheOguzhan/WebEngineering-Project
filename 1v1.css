@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #111;
+    --text-color: #eee;
+    --wordle-gray: #86888a;
+    --wordle-green: #6aaa64;
+    --wordle-yellow: #c9b458;
+    --wordle-red: #b33a3a;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .title {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: clamp(.4rem, 1.5vw, .8rem);
+    line-height: 1.2;
+}
+
+.timer-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: clamp(0.4rem, 1.5vw, 0.8rem);
+}
+
+.timer {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 500;
+    color: var(--wordle-green);
+    background-color: var(--background-color);
+    border: 2px solid var(--wordle-green);
+    border-radius: 6px;
+    padding: clamp(0.2rem, 0.8vw, 0.4rem) clamp(0.6rem, 2.5vw, 1rem);
+    min-width: clamp(3.5rem, 12vw, 5rem);
+    text-align: center;
+    font-family: 'Geist', monospace;
+    letter-spacing: 0.1em;
+}
+
+.container .game {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.2rem, 0.8vw, 0.4rem);
+    padding: clamp(0.8rem, 1.5vw, 1.5rem);
+}
+
+.game-board-row {
+    display: flex;
+    gap: clamp(0.2rem, 0.8vw, 0.4rem);
+    justify-content: center;
+}
+
+.active-cell {
+    border: 2px solid var(--text-color) !important;
+}
+
+
+.game-board-row-cell {
+    width: clamp(2rem, 7vw, 3.5rem);
+    height: clamp(2rem, 7vw, 3.5rem);
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    border: 2px solid var(--wordle-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.error-cell {
+    border: 2px solid var(--wordle-red) !important;
+}
+
+.green-cell {
+    border: 2px solid var(--wordle-green) !important;
+    background-color: var(--wordle-green) !important;
+}
+
+.yellow-cell {
+    border: 2px solid var(--wordle-yellow) !important;
+    background-color: var(--wordle-yellow) !important;
+}
+
+.gray-cell {
+    border: 2px solid var(--wordle-gray) !important;
+    background-color: var(--wordle-gray) !important;
+}
+
+/* Wordle-Tastatur-Styling */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.2rem, 0.8vw, 0.8rem);
+    align-items: center;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: clamp(0.15rem, 0.4vw, 0.4rem);
+}
+
+.keyboard-key:hover {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-key:active {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-green-key {
+    background-color: var(--wordle-green) !important;
+    border: 2px solid var(--wordle-green) !important;
+}
+
+.keyboard-green-key:hover {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-green-key:active {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-yellow-key {
+    background-color: var(--wordle-yellow) !important;
+    border: 2px solid var(--wordle-yellow) !important;
+}
+
+.keyboard-yellow-key:hover {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-yellow-key:active {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-gray-key {
+    background-color: var(--wordle-gray) !important;
+    border: 2px solid var(--wordle-gray) !important;
+}
+
+.keyboard-gray-key:hover {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-gray-key:active {
+    background-color: var(--wordle-gray);
+}
+
+.keyboard-key {
+    width: clamp(1.8rem, 6vw, 3.5rem);
+    height: clamp(1.8rem, 5vw, 2.5rem);
+    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+    border: 2px solid var(--wordle-gray);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Container für kleinere Bildschirme anpassen */
+@media (max-height: 600px) or (max-width: 400px) {
+    .container {
+        justify-content: flex-start;
+        padding-top: 1rem;
+    }
+
+    .keyboard {
+        margin-top: 0.5rem;
+    }
+
+    .timer-container {
+        margin-bottom: 0.5rem;
+    }
+
+    .timer {
+        font-size: 1rem;
+        padding: 0.2rem 0.6rem;
+        min-width: 3.5rem;
+    }
+}
+
+/* Weitere Anpassungen für sehr kleine Bildschirme */
+@media (max-width: 350px) {
+    .container .title {
+        margin-bottom: 0.5rem;
+    }
+
+    .game-board {
+        padding: 0.5rem;
+    }
+
+    .timer-container {
+        margin-bottom: 0.3rem;
+    }
+
+    .timer {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.5rem;
+        min-width: 3rem;
+    }
+}
+
+dialog {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--wordle-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+dialog h1 {
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
+    font-weight: 500;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+dialog p {
+    text-align: center;
+    line-height: 1.6;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 1rem;
+}
+
+dialog a.menu-dialog-button,
+dialog a {
+    display: block;
+    background-color: var(--wordle-green);
+    color: var(--text-color);
+    border: 2px solid var(--wordle-green);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+}
+
+dialog a.menu-dialog-button:hover,
+dialog a:hover {
+    opacity: 0.9;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+
+.share-game-button,
+.start-game-button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.nickname-input-container {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.nickname-cell {
+    width: clamp(2.2rem, 8vw, 3rem);
+    height: clamp(2.2rem, 8vw, 3rem);
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+    border: 2px solid var(--wordle-gray);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+    text-transform: uppercase;
+    caret-color: var(--text-color);
+    border-radius: 4px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nickname-cell:focus {
+    outline: none;
+    border-color: var(--text-color);
+    box-shadow: 0 0 0 1px var(--text-color);
+}
+
+.menu-dialog-button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--wordle-gray);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.menu-dialog-button:hover {
+    background-color: var(--wordle-gray);
+    color: var(--background-color);
+}
+
+#scoreboard-list {
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+
+#scoreboard-list ol {
+    list-style-type: decimal;
+    padding-left: 2rem;
+    margin: 0;
+}
+
+#scoreboard-list li {
+    padding: 0.3rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--wordle-gray);
+}
+
+#scoreboard-list li:last-child {
+    border-bottom: none;
+}
+
+#scoreboard-list li span.nickname {
+    font-weight: 500;
+}
+
+#scoreboard-list li span.score {
+    color: var(--wordle-green);
+}
+
+#scoreboard-list li span.date {
+    font-size: 0.8rem;
+    color: var(--wordle-gray);
+    margin-left: 0.5rem;
+}
+
+.menu-button {
+    background-color: var(--background-color);
+    border: 2px solid var(--text-color);
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+    height: 3.5rem;
+    font-size: 1.3rem;
+}
+
+.menu-button:hover {
+    background-color: var(--text-color);
+}
+
+.menu-button:active {
+    background-color: var(--text-color);
+}
+
+/* Verbindungsstatus */
+.connection-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: clamp(0.4rem, 1.5vw, 0.8rem);
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.6rem, 2vw, 1rem);
+    background-color: rgba(128, 128, 128, 0.1);
+    border: 1px solid var(--wordle-gray);
+    border-radius: 6px;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
+#status-text {
+    color: var(--wordle-yellow);
+    font-weight: 500;
+}
+
+#player-count {
+    color: var(--text-color);
+}
+
+.connection-status.connected #status-text {
+    color: var(--wordle-green);
+}
+
+.connection-status.waiting #status-text {
+    color: var(--wordle-yellow);
+}
+
+.connection-status.error #status-text {
+    color: var(--wordle-red);
+}
+
+/* Gegner-Brett-Anzeige nur mit Farben */
+.opponent-board-display-area {
+    display: block;
+    margin: 15px auto;
+    padding: 15px;
+    border: 2px solid var(--wordle-gray);
+    border-radius: 8px;
+    background-color: rgba(128, 128, 128, 0.1);
+    max-width: 300px;
+    text-align: center;
+}
+
+.opponent-board-display-area h4 {
+    text-align: center;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.opponent-board-display {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: clamp(0.15rem, 0.5vw, 0.25rem);
+    justify-content: center;
+}
+
+.opponent-board-display-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.15rem, 0.5vw, 0.25rem);
+}
+
+.opponent-board-display-cell {
+    width: clamp(1.5rem, 5vw, 2rem);
+    height: clamp(1.5rem, 5vw, 2rem);
+    border: 2px solid var(--wordle-gray);
+    background-color: var(--background-color);
+    border-radius: 4px;
+}
+
+.opponent-board-display-cell.correct-cell {
+    background-color: var(--wordle-green);
+    border-color: var(--wordle-green);
+}
+
+.opponent-board-display-cell.present-cell {
+    background-color: var(--wordle-yellow);
+    border-color: var(--wordle-yellow);
+}
+
+.opponent-board-display-cell.absent-cell {
+    background-color: var(--wordle-gray);
+    border-color: var(--wordle-gray);
+}
