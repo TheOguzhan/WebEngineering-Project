@@ -52,7 +52,8 @@ autorestart=true
 EOF
 
 # Expose ports
-EXPOSE 8080 3000
+EXPOSE 8080 8080
+EXPOSE 3000 3000
 
 # Use supervisor to run both services
 CMD ["/usr/bin/supervisord"] 

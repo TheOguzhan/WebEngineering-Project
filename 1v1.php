@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Wortduell</title>
     <link rel="stylesheet" href="./1v1.css">
     <script src="./1v1.js"></script>
+    <link rel="icon" href="./favicon.png">
     <?php
     // Datenbankverbindung einbinden
     require_once 'config/database.php';
-    
+
     // Datenbankverbindung mit Umgebungsvariablen abrufen
     $conn = getDatabaseConnection();
 
@@ -105,18 +106,18 @@
 <body>
     <main class="container">
         <button class="menu-button">⚙️</button>
-        <h1 class="title">1 v 1 Deutschle</h1>
-        
+        <h1 class="title">Wortduell</h1>
+
         <!-- Connection Status -->
         <div class="connection-status" id="connection-status">
             <span id="status-text">Verbindung wird hergestellt...</span>
             <span id="player-count">Spieler: 0/2</span>
         </div>
-        
+
         <div class="timer-container">
             <div class="timer" id="game-timer">00:00</div>
         </div>
-        
+
         <!-- Opponent Board Display -->
         <div class="opponent-board-display-area" id="opponent-board-display">
             <h4 id="opponent-name">Warten auf Gegner...</h4>
@@ -130,7 +131,7 @@
                 <?php endfor; ?>
             </div>
         </div>
-        
+
         <div class="game">
             <div class="game-board">
                 <?php for ($i = 0; $i < 6; $i++) : ?>
@@ -169,8 +170,9 @@
     <dialog id="game-lost-dialog">
         <div class="dialog-content">
             <h1>Verloren!</h1>
-            <p>Leider hast du das Wort nicht erraten.</p>
-            <a href="/">Nochmal spielen</a>
+            <p>Du hast das Wort leider nicht erraten.</p>
+            <p>Das gesuchte Wort war: <strong><?= htmlspecialchars($spiel_word) ?></strong></p>
+            <p>Bitte warte, bis dein Gegner das Spiel beendet hat.</p>
         </div>
     </dialog>
 
@@ -199,6 +201,15 @@
         <div class="dialog-content">
             <h1>Gegner gewonnen!</h1>
             <p id="opponent-won-text">Dein Gegner hat das Wort erraten und gewonnen!</p>
+            <a href="/">Neues Spiel starten</a>
+        </div>
+    </dialog>
+
+    <dialog id="game-over-opponent-also-lost-dialog">
+        <div class="dialog-content">
+            <h1>Spiel vorbei</h1>
+            <p>Dein Gegner hat das Wort ebenfalls nicht erraten.</p>
+            <p>Das gesuchte Wort war: <strong><?= htmlspecialchars($spiel_word) ?></strong></p>
             <a href="/">Neues Spiel starten</a>
         </div>
     </dialog>

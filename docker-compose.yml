@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    build: .
+    image: theoguzhan/web-engineering-project:latest
     ports:
       - "8080:8080"
       - "3000:3000"
@@ -16,6 +16,7 @@ services:
       - db
     networks:
       - webengineering-network
+    restart: unless-stopped
 
   db:
     image: mariadb:10.4
