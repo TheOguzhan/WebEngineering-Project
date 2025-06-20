@@ -63,7 +63,8 @@ const showMenu = () => {
 // WebSocket-Verbindung und Handler
 const connectWebSocket = () => {
     try {
-        ws = new WebSocket('ws://localhost:3000');
+        const wsProtocol = location.protocol === 'https:' ? 'wss' : 'ws';
+        ws = new WebSocket(`${wsProtocol}://${location.hostname}:3000`);
 
         ws.onopen = () => {
             console.log('WebSocket verbunden');
@@ -159,8 +160,8 @@ const handleWebSocketMessage = (data) => {
             break;
 
         case 'error':
-            console.error('WebSocket-Fehler:', data.message);
-            updateConnectionStatus('error', 'Fehler: ' + data.message);
+            // console.error('WebSocket-Fehler:', data.message);
+            // updateConnectionStatus('error', 'Fehler: ' + data.message);
             break;
     }
 };

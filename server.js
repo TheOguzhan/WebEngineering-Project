@@ -92,7 +92,11 @@ async function handleJoinGame(ws, spiel_uuid, player_name) {
 
     // Das Wort für dieses Spiel abrufen
     try {
-        const response = await fetch(`http://localhost:8080/get_word.php?uuid=${spiel_uuid}`);
+        let url = 'http://localhost:8080/get_word.php?uuid=' + spiel_uuid;
+        if (process.env.NODE_ENV === 'production') {
+            url = process.env.DEPLOYMENT_URL + 'get_word.php?uuid=' + spiel_uuid;
+        }
+        const response = await fetch(url);
         const wordData = await response.json();
 
         ws.send(JSON.stringify({
@@ -139,7 +143,14 @@ async function handleGuessResult(ws, spiel_uuid, guess_result, guess_word, row) 
     if (!room) return;
 
     const player = playerConnections.get(ws);
-    if (!player) return;
+    if (!player || room.gameState.gameFinished) return;
+
+    // Verify last guess equals secretWord before accepting win
+    const lastRow = room.gameState[`player${player.playerNumber}Board`].findLast(r => r.some(c => c));
+    if (!lastRow || lastRow.join('') !== room.gameState.secretWord) {
+        ws.send(JSON.stringify({ type: 'error', message: 'Win verification failed' }));
+        return;
+    }
 
     const playerIndex = player.playerNumber - 1;
 

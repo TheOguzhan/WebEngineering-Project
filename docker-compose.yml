@@ -12,6 +12,8 @@ services:
       - DB_NAME=mariadb
       - DB_USER=mariadb
       - DB_PASSWORD=mariadb
+      - NODE_ENV=production
+      - DEPLOYMENT_URL=http://localhost:8080/
     depends_on:
       - db
     networks:
