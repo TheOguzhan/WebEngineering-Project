@@ -6,29 +6,40 @@
 
 ## 🌐 Live-Demonstration
 
-**Die Anwendung ist online verfügbar unter:** [http://152.53.112.174:8081/](http://152.53.112.174:8081/)
+**🌍 Live-URL:** [http://152.53.112.174:8081/](http://152.53.112.174:8081/)
+
+> **⚠️ Wichtiger Hinweis:** Da die Live-Anwendung über HTTP (nicht HTTPS) bereitgestellt wird, funktioniert die automatische Zwischenablage-Funktion in modernen Browsern nicht. Dies ist eine Sicherheitsbeschränkung der Browser und betrifft nur die Live-Demo. Bei lokaler HTTPS-Installation funktioniert das Feature vollständig.
+
+**Verfügbare Modi:**
+
+- Einzelspieler-Modus: http://152.53.112.174:8081/
+- 1v1-Modus: http://152.53.112.174:8081/1v1.php
 
 ### Screenshots der Anwendung
 
-#### Hauptspielbereich - Einzelspielermodus
+#### Hauptmenü und Navigation
+
+![Wortduell Hauptmenü](screenshots/wortduell-menu.png)
+_Das Hauptmenü mit Navigation zwischen Solo- und 1v1-Modus_
+
+#### Einzelspieler-Gameplay
 
 ![Wortduell Hauptspiel](screenshots/wortduell-hauptspiel.png)
-_Übersicht des Hauptspiels mit deutscher QWERTZ-Tastatur und 6x5 Spielfeld_
-
-#### Menü-System
-
-![Wortduell Menü](screenshots/wortduell-menu.png)
-_Integriertes Menü mit Spiel-Sharing, 1v1-Modus und Bestenlisten-Zugang_
-
-#### Mehrspielermodus (1v1)
-
-![Wortduell 1v1 Modus](screenshots/wortduell-1v1-modus.png)
-_1v1-Modus mit WebSocket-Verbindungsstatus und Gegner-Wartebereich_
-
-#### Gameplay-Demonstration
+_Das Hauptspielfeld im Einzelspieler-Modus mit deutscher QWERTZ-Tastatur_
 
 ![Wortduell Gameplay](screenshots/wortduell-gameplay.png)
-_Live-Gameplay mit Timer und Worteingabe "MUSIK"_
+_Aktive Spielsituation mit Farbfeedback nach Worteingabe_
+
+![Wortduell Gameplay - Worteingabe](screenshots/wortduell-gameplay-mid-word.png)
+_Während der Worteingabe: Spieler gibt "SCHUL" ein_
+
+#### Multiplayer 1v1-Modus
+
+![Wortduell 1v1 Modus](screenshots/wortduell-1v1-modus.png)
+_Der 1v1-Modus mit geteiltem Bildschirm für zwei Spieler_
+
+![Wortduell 1v1 Warten](screenshots/wortduell-1v1-waiting.png)
+_Wartebereich im 1v1-Modus: Warten auf den zweiten Spieler_
 
 ### Live-Deployment Details
 
@@ -415,7 +426,7 @@ Zur Ausführung des Projekts ist eine lokale Entwicklungsumgebung erforderlich, 
 
 **Erforderliche Komponenten:**
 
-- Docker & Docker Compose (empfohlen) oder XAMPP/MAMP
+- Docker & Docker Compose (empfohlen)
 - PHP ab Version 8.0 mit mysqli-Extension
 - Node.js ab Version 16.0 mit npm
 - MariaDB/MySQL ab Version 5.7
@@ -441,24 +452,6 @@ docker-compose up -d
 3. **Anwendung aufrufen:**
    - Hauptanwendung: http://localhost:8080
    - 1v1-Modus: http://localhost:8080/1v1.php
-
-#### Option 2: Lokale Installation (XAMPP)
-
-1. **XAMPP starten:** Apache- und MySQL-Module aktivieren
-2. **Projektdateien kopieren:** Den Ordner in `htdocs/wortduell` verschieben
-3. **Datenbank einrichten:**
-   - phpMyAdmin öffnen (http://localhost/phpmyadmin)
-   - Neue Datenbank `wortduell` erstellen
-   - Automatische Tabellenerstellung beim ersten Aufruf
-4. **Node.js-Dependencies installieren:**
-
-```bash
-cd htdocs/wortduell
-npm install
-node server.js
-```
-
-5. **Projekt aufrufen:** http://localhost/wortduell
 
 ### Funktionen und Bedienung
 
