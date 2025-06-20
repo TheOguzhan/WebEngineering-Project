@@ -604,6 +604,14 @@ Für Produktionsumgebungen wird SSL-Verschlüsselung empfohlen, insbesondere fü
 - **Design-Inspiration:** Originales Wordle-Spiel von Josh Wardle
 - **Icons und Assets:** Eigene Implementierung / KI-Generierung
 
+### Kontakt
+
+- Für Fragen oder Feedback können Sie sich gerne an mich wenden:
+
+- **Name:** Oğuzhan Özkir
+- **E-Mail:** oguzhan@oguzhanozkir.com oder s242280@student.dhbw-mannheim.de
+- **GitHub:** [TheOguzhan](https://github.com/TheOguzhan)
+
 ---
 
 _Letzte Aktualisierung: Juni 2025_
